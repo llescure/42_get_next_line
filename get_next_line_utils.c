@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:09:43 by llescure          #+#    #+#             */
-/*   Updated: 2020/11/15 22:15:48 by llescure         ###   ########.fr       */
+/*   Updated: 2020/11/17 22:36:32 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ char			*ft_trim(char *str, int c)
 	i = 0;
 	if(!(new = malloc(sizeof(char) * ft_strlen(str))))
 		return (NULL);
-	while (i <= ft_strlen(str))
+	while (str[i] != '\0')
 	{
 		if (c == str[i])
 		{
-			ft_strlcpy(new, (const char *)str, i);
+			ft_strlcpy(new, (const char *)str, i + 1);
 			return (new);
 		}
 		i++;

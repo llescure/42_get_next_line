@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 21:49:03 by llescure          #+#    #+#             */
-/*   Updated: 2020/11/15 22:35:22 by llescure         ###   ########.fr       */
+/*   Updated: 2020/11/17 23:24:06 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,36 @@
 
 int		get_next_line(int fd, char **line)
 {
-	char *buf;
-	static char *temp;
-	int compt;
+	char buf[BUFFER_SIZE + 1];
+	static char *temp = "";
+	char *cpy;
+	int	cara_read;
 	
-	temp = NULL;
-	if(!(buf = malloc(sizeof(char) * BUFFER_SIZE)))
+	cpy = "";
+	cara_read = 1;
+	if (fd < 0 || BUFFER_SIZE <= 0 || line == NULL)
 		return (-1);
-	compt = 0;
-	if (ft_strchr(temp, '\n') != NULL)
+	while ((cara_read = read(fd, buf, BUFFER_SIZE)) > 0 && ft_strchr(buf, '\n') == NULL)
 	{
-		*(line + compt) = ft_trim(temp, '\n');
-		compt++;
+		buf[cara_read] = '\0';
+		temp = ft_strjoin(temp, buf);
+	}
+	buf[cara_read] = '\0';
+	temp = ft_strjoin(temp, buf);
+	cpy = ft_trim(temp, '\n');
+	*line = ft_strjoin(*line, cpy);
+	temp = ft_strchr(temp, '\n');
+	while (ft_strchr(temp, '\n') != NULL)
+	{
+		cpy = ft_trim(temp, '\n');
+		*line = ft_strjoin(*line, cpy);
 		temp = ft_strchr(temp, '\n');
-		return (1);
 	}
-	else if (ft_strchr(temp, '\0') != NULL)
-	{
-		*(line + compt) = ft_trim(buf, '\0');
-		free(temp);
+	printf("line2%s\n", *line);
+	printf("temp2%s\n", temp);
+	if (ft_strlen(temp) == 0)
 		return (0);
-	}
-	while (read(fd, buf, BUFFER_SIZE) >= 0 && ft_strchr(buf, '\n') == NULL)
-	{
-		printf("%s", ft_strjoin(temp, buf));
-		*(line + compt) = ft_trim(buf, '\n');
-		temp = ft_strchr(buf, '\n');
-		compt++;
-		free(buf);
-	}
-	return (-1);
+	return (1);
 }	
 
 int		main(void)
@@ -54,5 +54,6 @@ int		main(void)
 	if(!(str = malloc(sizeof(char) * BUFFER_SIZE)))
 		return (0);
 	fd = open("test.txt", O_RDWR);
-	printf("%i\n", get_next_line(fd, &str));
+	while (get_next_line(fd, &str) != 0)
+		printf("%i\n", get_next_line(fd, &str));
 }
