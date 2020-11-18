@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 21:49:03 by llescure          #+#    #+#             */
-/*   Updated: 2020/11/18 22:29:11 by llescure         ###   ########.fr       */
+/*   Updated: 2020/11/18 22:39:39 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int		get_next_line(int fd, char **line)
 		temp = ft_strjoin(temp, buf);
 	}
 	printf("char%i\n", char_read);
-	if (char_read == 0)
+	buf[char_read] = '\0';
+	temp = ft_strjoin(temp, buf);
+	if (ft_strlen(temp) == 0)
 		return (0);
-	if (char_read != 0)
+	else
 	{
-		buf[char_read] = '\0';
-		temp = ft_strjoin(temp, buf);
 		cpy = ft_trim(temp, '\n');
 		*line = ft_strjoin(*line, cpy);
 		temp = ft_strchr(temp, '\n');
