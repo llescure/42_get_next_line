@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:09:43 by llescure          #+#    #+#             */
-/*   Updated: 2020/11/18 21:54:43 by llescure         ###   ########.fr       */
+/*   Updated: 2020/11/18 22:53:08 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char		*ft_strchr(const char *str, int c)
 	return (0);
 }
 
-char			*ft_strjoin(char const *s1, char const *s2)
+char		*ft_strjoin(char const *s1, char const *s2)
 {
 	unsigned int						i;
 	unsigned int						j;
@@ -63,7 +63,7 @@ char			*ft_strjoin(char const *s1, char const *s2)
 	return (rslt);
 }
 
-size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t i;
 
@@ -78,13 +78,13 @@ size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (ft_strlen((char *)src));
 }
 
-char			*ft_trim(char *str, int c)
-{	
-	size_t i;
-	char *new;
+char		*ft_trim(char *str, int c)
+{
+	size_t						i;
+	char						*new;
 
 	i = 0;
-	if(!(new = malloc(sizeof(char) * ft_strlen(str))))
+	if (!(new = malloc(sizeof(char) * ft_strlen(str))))
 		return (NULL);
 	while (str[i] != '\0')
 	{
@@ -96,4 +96,4 @@ char			*ft_trim(char *str, int c)
 		i++;
 	}
 	return (NULL);
-}	
+}
