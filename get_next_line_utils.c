@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:09:43 by llescure          #+#    #+#             */
-/*   Updated: 2020/11/18 22:53:08 by llescure         ###   ########.fr       */
+/*   Updated: 2020/11/20 17:13:15 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char		*ft_strchr(const char *str, int c)
 	return (0);
 }
 
-char		*ft_strjoin(char const *s1, char const *s2)
+char		*ft_strjoin(char *s1, char *s2)
 {
 	unsigned int						i;
 	unsigned int						j;
