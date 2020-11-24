@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:09:43 by llescure          #+#    #+#             */
-/*   Updated: 2020/11/20 17:13:15 by llescure         ###   ########.fr       */
+/*   Updated: 2020/11/24 22:15:34 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ size_t		ft_strlen(const char *str)
 	return (i);
 }
 
-char		*ft_strchr(const char *str, int c)
+char		*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned long i;
+	unsigned int				i;
+	const char					*str;
 
 	i = 0;
-	if (c == '\0' && str[0] == '\0')
-		return ((char *)str);
-	while (i <= ft_strlen(str))
+	str = s;
+	while (str[i] != '\0' && i < n)
 	{
-		if (c == str[i])
+		if (str[i] == (char)c)
 			return ((char *)&str[i + 1]);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
 char		*ft_strjoin(char *s1, char *s2)
@@ -95,5 +95,6 @@ char		*ft_trim(char *str, int c)
 		}
 		i++;
 	}
-	return (NULL);
+	ft_strlcpy(new, (const char *)str, i + 1);
+	return (new);
 }
