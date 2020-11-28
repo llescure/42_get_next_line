@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:09:43 by llescure          #+#    #+#             */
-/*   Updated: 2020/11/24 22:15:34 by llescure         ###   ########.fr       */
+/*   Updated: 2020/11/28 22:59:11 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ size_t		ft_strlen(const char *str)
 	return (i);
 }
 
-char		*ft_memchr(const void *s, int c, size_t n)
+char		*ft_strchr(const char *str, int c)
 {
-	unsigned int				i;
-	const char					*str;
+	unsigned long i;
 
 	i = 0;
-	str = s;
-	while (str[i] != '\0' && i < n)
+	if (c == '\0' && str[0] == '\0')
+		return ((char *)str);
+	while (i <= ft_strlen(str))
 	{
-		if (str[i] == (char)c)
+		if (c == str[i])
 			return ((char *)&str[i + 1]);
 		i++;
 	}
-	return (NULL);
+	return (0);
 }
 
 char		*ft_strjoin(char *s1, char *s2)
@@ -84,7 +84,7 @@ char		*ft_trim(char *str, int c)
 	char						*new;
 
 	i = 0;
-	if (!(new = malloc(sizeof(char) * ft_strlen(str))))
+	if (!(new = malloc(sizeof(char) * ft_strlen(str) + 1)))
 		return (NULL);
 	while (str[i] != '\0')
 	{
