@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 22:59:38 by llescure          #+#    #+#             */
-/*   Updated: 2020/11/28 23:12:45 by llescure         ###   ########.fr       */
+/*   Updated: 2020/11/29 11:39:17 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int main()
 
 	pipe(fd);
 
-	char *text = "hello\nhello\nhellohello\nhello\n";
+	char *text = "hello\nhello\nhellohello\nhello";
 	write(fd[1], text, ft_strlen(text));
 	close(fd[1]);
 
