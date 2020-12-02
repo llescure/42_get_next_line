@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:09:43 by llescure          #+#    #+#             */
-/*   Updated: 2020/11/29 11:30:14 by llescure         ###   ########.fr       */
+/*   Updated: 2020/12/02 21:50:43 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ char		*ft_strchr(const char *str, int c)
 	unsigned long i;
 
 	i = 0;
-	if (c == '\0' && str[0] == '\0')
+  if (c == '\0' && str[0] == '\0')
 		return ((char *)str);
 	while (i <= ft_strlen(str))
 	{
 		if (c == str[i])
-			return ((char *)&str[i + 1]);
+			return ((char *)&str[i]);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
 char		*ft_strjoin(char *s1, char *s2)
@@ -63,38 +63,35 @@ char		*ft_strjoin(char *s1, char *s2)
 	return (rslt);
 }
 
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
+char    *ft_trim(char *str, int c)
 {
-	size_t i;
+  char *new_str;
+  unsigned int i;
+  unsigned int size;
 
-	i = 0;
-	while (i + 1 < dstsize && src[i] != '\0')
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	if (dstsize != 0)
-		dst[i] = '\0';
-	return (ft_strlen((char *)src));
+  size = 0;
+  while (str[size] != '\0' && str[size] != c)
+    size++;
+  if(!(new_str = malloc(sizeof(char) * size + 1)))
+    return (NULL);
+  i = 0;
+  while (i < size)
+  {
+    new_str[i] = str[i];
+    i++;
+  }
+  new_str[i] = '\0';
+  return (new_str);
 }
 
-char		*ft_trim(char *str, int c)
-{
-	size_t						i;
-	char						*new;
+char    *get_temp(char *str, int c)
+{ 
+	unsigned int i;
 
-	i = 0;
-	if (!(new = malloc(sizeof(char) * ft_strlen(str) + 1)))
-		return (NULL);
-	while (str[i] != '\0')
-	{
-		if (c == str[i])
-		{
-			ft_strlcpy(new, (const char *)str, i + 1);
-			return (new);
-		}
+  i = 0;
+  while (str[i] != '\0' && str[i] != c)
 		i++;
-	}
-	ft_strlcpy(new, (const char *)str, i + 1);
-	return (new);
+	if (str[i] == c)
+		return ((char *)&str[i + 1]);
+	return (NULL);
 }
