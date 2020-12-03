@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:09:43 by llescure          #+#    #+#             */
-/*   Updated: 2020/12/02 21:50:43 by llescure         ###   ########.fr       */
+/*   Updated: 2020/12/03 22:53:28 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char		*ft_strchr(const char *str, int c)
 	unsigned long i;
 
 	i = 0;
-  if (c == '\0' && str[0] == '\0')
+	if (c == '\0' && str[0] == '\0')
 		return ((char *)str);
 	while (i <= ft_strlen(str))
 	{
@@ -63,35 +63,40 @@ char		*ft_strjoin(char *s1, char *s2)
 	return (rslt);
 }
 
-char    *ft_trim(char *str, int c)
+char		*ft_trim(char *str, int c)
 {
-  char *new_str;
-  unsigned int i;
-  unsigned int size;
+	char					*new_str;
+	unsigned int			i;
+	unsigned int			size;
 
-  size = 0;
-  while (str[size] != '\0' && str[size] != c)
-    size++;
-  if(!(new_str = malloc(sizeof(char) * size + 1)))
-    return (NULL);
-  i = 0;
-  while (i < size)
-  {
-    new_str[i] = str[i];
-    i++;
-  }
-  new_str[i] = '\0';
-  return (new_str);
+	size = 0;
+	while (str[size] != '\0' && str[size] != c)
+		size++;
+	if (!(new_str = malloc(sizeof(char) * size + 1)))
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
 }
 
-char    *get_temp(char *str, int c)
-{ 
+char		*get_temp(char *str, int c)
+{
 	unsigned int i;
 
-  i = 0;
-  while (str[i] != '\0' && str[i] != c)
+	i = 0;
+	while (str[i] != '\0' && str[i] != c)
 		i++;
+	if (str[i] == '\0')
+	{
+		str = "";
+		return (str);
+	}
 	if (str[i] == c)
 		return ((char *)&str[i + 1]);
-	return (NULL);
+	return (0);
 }
