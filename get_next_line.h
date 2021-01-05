@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 21:46:38 by llescure          #+#    #+#             */
-/*   Updated: 2020/12/02 22:08:53 by llescure         ###   ########.fr       */
+/*   Updated: 2021/01/05 12:22:49 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,8 @@
 
 # define BUF BUFFER_SIZE
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
 
 int			get_next_line(int fd, char **line);
 size_t		ft_strlen(const char *str);
