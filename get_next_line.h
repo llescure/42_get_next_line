@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 21:46:38 by llescure          #+#    #+#             */
-/*   Updated: 2021/01/05 12:22:49 by llescure         ###   ########.fr       */
+/*   Updated: 2021/01/06 18:15:43 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <stdlib.h>
 
 int			get_next_line(int fd, char **line);
+char		*allocate_static(void);
+int			return_value(int char_read);
 size_t		ft_strlen(const char *str);
 char		*ft_strjoin(char *s1, char *s2);
 char		*ft_strchr(const char *str, int c);

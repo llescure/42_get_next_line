@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:09:43 by llescure          #+#    #+#             */
-/*   Updated: 2020/12/03 22:53:28 by llescure         ###   ########.fr       */
+/*   Updated: 2021/01/06 18:31:04 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,25 @@ char		*ft_trim(char *str, int c)
 
 char		*get_temp(char *str, int c)
 {
-	unsigned int i;
+	unsigned int	i;
+	unsigned int	j;
+	char			*temp;
 
 	i = 0;
+	j = 0;
+	if (!(temp = malloc(sizeof(char) * ft_strlen(str))))
+		return (NULL);
 	while (str[i] != '\0' && str[i] != c)
 		i++;
 	if (str[i] == '\0')
+		return (temp);
+	i++;
+	while (str[i] != '\0')
 	{
-		str = "";
-		return (str);
+		temp[j] = str[i];
+		j++;
+		i++;
 	}
-	if (str[i] == c)
-		return ((char *)&str[i + 1]);
-	return (0);
+	temp[j] = '\0';
+	return (temp);
 }
