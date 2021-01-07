@@ -92,7 +92,7 @@ char		*get_temp(char *str, int c)
 
 	i = 0;
 	j = 0;
-	if (!(temp = malloc(sizeof(char) * ft_strlen(str))))
+	if (!(temp = malloc(sizeof(char) * ft_strlen(str) + 1)))
 		return (NULL);
 	while (str[i] != '\0' && str[i] != c)
 		i++;
