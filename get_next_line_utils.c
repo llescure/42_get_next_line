@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:09:43 by llescure          #+#    #+#             */
-/*   Updated: 2021/01/08 15:49:37 by llescure         ###   ########.fr       */
+/*   Updated: 2021/01/08 17:50:23 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ size_t		ft_strlen(const char *str)
 	return (i);
 }
 
-char		*ft_strchr(const char *str, int c)
+char		*ft_strchr(const char *str, int c, int pos)
 {
 	unsigned long i;
 
-	i = 0;
+	i = pos;
 	if (c == '\0' && str[0] == '\0')
 		return ((char *)str);
 	while (i <= ft_strlen(str))

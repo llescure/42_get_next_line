@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 21:49:03 by llescure          #+#    #+#             */
-/*   Updated: 2021/01/08 15:51:22 by llescure         ###   ########.fr       */
+/*   Updated: 2021/01/08 17:52:30 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int		get_next_line(int fd, char **line)
 			return (-1);
 	if(!(buf = malloc(sizeof(char) * BUF + 1)))
 		return (-1);
-	while ((ft_strchr(temp, '\n') == NULL) &&
-			(char_read = read(fd, buf, BUF)) > 0)
+	while ((ft_strchr(temp, '\n', ft_strlen(temp) - char_read) == NULL) &&
+		   	(char_read = read(fd, buf, BUF)) > 0)
 	{
 		buf[char_read] = '\0';
 		cpy = temp;
