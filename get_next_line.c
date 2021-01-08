@@ -6,22 +6,11 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 21:49:03 by llescure          #+#    #+#             */
-/*   Updated: 2021/01/08 17:52:30 by llescure         ###   ########.fr       */
+/*   Updated: 2021/01/09 00:00:01 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-
-char	*allocate_static(void)
-{
-	char	*temp;
-
-	if (!(temp = malloc(sizeof(char))))
-		return (NULL);
-	temp[0] = '\0';
-	return (temp);
-}
 
 int		return_value(int char_read, char **temp)
 {
@@ -34,33 +23,62 @@ int		return_value(int char_read, char **temp)
 	return (0);
 }
 
+int		error_case(int fd, char **line, char **temp, char **buf)
+{
+	if (fd < 0 || BUFFER_SIZE <= 0 || line == NULL || read(fd, *temp, 0) < 0)
+		return (-1);
+	if (*temp == NULL)
+	{
+		if (!(*temp = malloc(sizeof(char))))
+			return (-1);
+		*temp[0] = '\0';
+	}
+	if (!(*buf = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+		return (-1);
+	return (0);
+}
+
+char	*copy_to_join(char *temp, char *buf)
+{
+	char				*cpy;
+
+	cpy = temp;
+	temp = ft_strjoin(cpy, buf);
+	free(cpy);
+	return (temp);
+}
+
+char	*copy_to_get_temp(char *temp)
+{
+	char				*cpy;
+
+	cpy = temp;
+	temp = get_temp(temp, '\n');
+	free(cpy);
+	return (temp);
+}
+
 int		get_next_line(int fd, char **line)
 {
 	char				*buf;
 	static char			*temp = NULL;
 	int					char_read;
-	char				*cpy;
 
 	char_read = 1;
-	if (fd < 0 || BUF <= 0 || line == NULL || read(fd, 0, 0) < 0)
+	if (error_case(fd, line, &temp, &buf) < 0)
 		return (-1);
-	if (temp == NULL)
-		if (!(temp = allocate_static()))
-			return (-1);
-	if(!(buf = malloc(sizeof(char) * BUF + 1)))
-		return (-1);
-	while ((ft_strchr(temp, '\n', ft_strlen(temp) - char_read) == NULL) &&
-		   	(char_read = read(fd, buf, BUF)) > 0)
+	if (!(ft_strchr(temp, '\n')))
 	{
-		buf[char_read] = '\0';
-		cpy = temp;
-		temp = ft_strjoin(cpy, buf);
-		free(cpy);
+		while ((char_read = read(fd, buf, BUFFER_SIZE)) > 0)
+		{
+			buf[char_read] = '\0';
+			temp = copy_to_join(temp, buf);
+			if (ft_strchr(buf, '\n'))
+				break ;
+		}
 	}
 	free(buf);
 	*line = ft_trim(temp, '\n');
-	cpy = temp;
-	temp = get_temp(temp, '\n');
-	free(cpy);
+	temp = copy_to_get_temp(temp);
 	return (return_value(char_read, &temp));
 }
