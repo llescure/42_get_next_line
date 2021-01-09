@@ -6,7 +6,7 @@
 /*   By: llescure <llescure@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 22:59:38 by llescure          #+#    #+#             */
-/*   Updated: 2021/01/08 23:00:21 by llescure         ###   ########.fr       */
+/*   Updated: 2021/01/09 14:58:48 by llescure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,16 @@ int		main(void)
 	int compteur;
 
  	compteur = 0;
- 	if (!(str = malloc(sizeof(char) * BUF)))
+ 	if (!(str = malloc(sizeof(char) * BUFFER_SIZE)))
  		return (0);
  	fd = open("test.txt", O_RDWR);
- 	while ((rslt = get_next_line(fd, &str)) != 0)
+ 	if ((rslt = get_next_line(fd, &str)) == 1)
+ 	{
+		compteur++;
+		printf("%d: %s\n", rslt, str);
+ 	}
+ 	fd = open("test2.txt", O_RDWR);
+ 	if ((rslt = get_next_line(fd, &str)) == 1)
  	{
 		compteur++;
 		printf("%d: %s\n", rslt, str);
